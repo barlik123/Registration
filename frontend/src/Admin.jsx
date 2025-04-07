@@ -51,7 +51,7 @@ function Admin() {
         </div>
       </div>
     }
-    <Link to="/"><button>Go to home Page</button></Link>
+    <Link to="/"><button>Go to Home Page</button></Link>
   </>
   );
 }

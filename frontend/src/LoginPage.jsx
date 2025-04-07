@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
+import auth from './auth-service/auth';
 import SignUp from './SignUp';
 
 const LoginPage = () => {
@@ -29,10 +30,12 @@ const LoginPage = () => {
             const data = await response.json()
             if (data.isAdmin) {
                 clearParamters()
+                auth.setAdminAuthenticated(true); // Set the admin authenticated status
                 navigate("/Admin") // Redirect to Admin page if the user is an admin
             }
             else {
                 clearParamters()
+                auth.setUserAuthenticated(true); // Set the user authenticated status
                 navigate("/Thanks") // Redirect to Thanks page if the user is not an admin
             }
         } else if (response.status == 401 || response.status == 404) { // unsuccessful login
