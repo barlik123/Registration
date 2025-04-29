@@ -1,4 +1,5 @@
 from config import db
+from datetime import datetime
 
 class Contact(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -8,6 +9,7 @@ class Contact(db.Model):
     location = db.Column(db.String(80),unique=False, nullable=False)
     password = db.Column(db.String(256), nullable=False) 
     is_admin = db.Column(db.Boolean,unique=False, nullable=False)
+    time_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
     def to_json(self):
         return {
@@ -16,5 +18,6 @@ class Contact(db.Model):
             "lastName": self.last_name,
             "email": self.email,
             "location": self.location,
-            "isAdmin": self.is_admin
+            "isAdmin": self.is_admin,
+            "timeCreated": self.created_at.isoformat()  # ISO 8601 format
         }

@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import auth from './auth-service/auth';
 import SignUp from './SignUp';
 
@@ -41,7 +41,6 @@ const LoginPage = () => {
         } else if (response.status == 401 || response.status == 404) { // unsuccessful login
             alert("Unsuccessful login. \ntry again");
             clearParamters()
-            
         }
     }
 
@@ -67,11 +66,7 @@ const LoginPage = () => {
             </div>
             <button type="submit">{"Login"}</button>
         </form>
-        <SignUp /> {/* for registaring */}
-        <div>
-            <Link to="/Admin"><button>Login to Admin Page</button></Link>
-            <Link to="/Thanks"><button>Login to Thanks Page</button></Link>
-        </div>
+        <SignUp /> {/* for registration */}
     </div>
     )
 }

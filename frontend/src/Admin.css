@@ -1,0 +1,16 @@
+.admin {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.admin-list {
+    height: 60vh;        /* Limit height to 300px */
+    overflow-y: auto;     /* Vertical scrollbar appears if content is too big */
+    width: 50vw;
+    overflow-x: auto;
+    padding: 5px;        /* Optional: Space inside the container */
+    box-sizing: border-box; /* So padding doesn't mess up height */
+  }
+
+
+  

@@ -1,7 +1,9 @@
 from flask import request, jsonify
 from config import app, db
 from models import Contact
+from sqlalchemy import func
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime
 
 @app.route("/contacts", methods=["GET"])
 def get_contacts():
@@ -94,9 +96,49 @@ def login():
     else:
         return jsonify({"message": "Invalid credentials"}), 401
 
+
+@app.route("/reg_dates", methods=["GET"])
+def get_times():
+    # Group by year, month, and day and count occurrences
+    grouped_data = (
+        db.session.query(
+            func.extract('year', Contact.time_created).label('year'),
+            func.extract('month', Contact.time_created).label('month'),
+            func.extract('day', Contact.time_created).label('day'),
+            func.count(Contact.id).label('count')
+        )
+        .group_by(
+            func.extract('year', Contact.time_created),
+            func.extract('month', Contact.time_created),
+            func.extract('day', Contact.time_created)
+        ).all()
+    )
+
+    json_contacts = [
+        {"Year": int(date.year), "Month": int(date.month), "Day": int(date.day), "occurances": date.count}
+        for date in grouped_data
+    ]
+
+
+    return jsonify({"dates": json_contacts})
+
+#function to manually add an admin user (incase you get locked out)
+def add_admin(first_name, last_name, email, password, location, is_admin=False):
+    hashed_password = generate_password_hash(password)  # Hash the password
+    new_admin= Contact(first_name=first_name, last_name=last_name,\
+         email=email, password=hashed_password, location=location, is_admin=is_admin )
+    try:
+        db.session.add(new_admin)
+        db.session.commit()
+    except Exception as e:
+        return print(e)
+    
 if __name__ == "__main__":
+    
     with app.app_context():
         #db.drop_all()  # Deletes previous tables
-        db.create_all()
-
+        db.create_all() # Creates the tables
+        #add_admin("Admin", "Admino", "Admin", "Admin123", "United States") #manually add an admin user
+        # for i in range(11, 23): #for testing purposes
+        #     add_admin(f"test{i}", f"test{i}", f"test{i}", f"test{i}", "United States")
     app.run(debug=True)

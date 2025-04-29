@@ -71,8 +71,8 @@ const ContactForm = ({ existingContact = {}, updateCallback, adminMode= false })
         <div>
             <label>Select Country: </label>
             <select value={location} onChange={(e) => setLocation(e.target.value)}>
-                {countries.map(({ name}) => (
-                <option value={name}> {name} </option> ))}
+                {countries.map(({ name},index) => (
+                <option key={index} value={name}> {name} </option> ))}
             </select>
         </div>
         <div>

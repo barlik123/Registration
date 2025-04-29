@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react' 
 import ContactList from './ContactList'
 import './App.css'
+import './admin.css'
 import ContactForm from './ContactForm'
 import { Link } from "react-router-dom";
+
+import BarChartComponent from "./chart";
 
 function Admin() {
   const [contacts,setContacts] = useState([])
@@ -40,19 +43,27 @@ function Admin() {
   }
 
   return (
-  <>
-    <ContactList contacts={contacts} updateContact={openEditModal} updateCallback={{onUpdate}}/>
-    <button onClick={openCreateModal}>Create New Contact</button>
-    {
-      isModalOpen && <div className="modal">
-        <div className="modal-content">
-          <span className="close" onClick={closeModal}>&times;</span>
-          <ContactForm existingContact={currentContact} updateCallback={onUpdate} adminMode={true}/>
+    <>
+      <h1>Admin Page</h1>
+      <div className="admin">
+        <div >
+          <ContactList contacts={contacts} updateContact={openEditModal} updateCallback={{onUpdate}}/>
+          <button onClick={openCreateModal}>Create New Contact</button>
+          {
+            isModalOpen && <div className="modal">
+              <div className="modal-content">
+                <span className="close" onClick={closeModal}>&times;</span>
+                <ContactForm existingContact={currentContact} updateCallback={onUpdate} adminMode={true}/>
+              </div>
+            </div>
+          }
+          <Link to="/"><button>Go to Home Page</button></Link>
+        </div>
+        <div className="admin-charts">
+          <BarChartComponent />
         </div>
       </div>
-    }
-    <Link to="/"><button>Go to Home Page</button></Link>
-  </>
+    </>
   );
 }
 
