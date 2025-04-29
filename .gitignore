@@ -1,0 +1,18 @@
+
+.vscode/
+
+# Ignore backend files
+backend/__pycache__/
+backend/logs/
+backend/.venv/
+backend/Include/
+backend/instance/
+backend/Lib/
+backend/Scripts/
+
+
+# Ignore frontend files
+frontend/node_modules/
+frontend/public/
+frontend/eslint.config.js
+frontend/vite.config.js
