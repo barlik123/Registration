@@ -18,6 +18,7 @@ def get_contacts():
     ]
     return jsonify({"contacts": json_contacts})
 
+# Function that gets contact details from frontend signup and adds them to the database
 @app.route("/create_contact", methods=["POST"])
 def create_contact():
     first_name = request.json.get("firstName")
@@ -43,6 +44,7 @@ def create_contact():
     
     return (jsonify({"message": "contact created"}), 201)
 
+# Function that updates existing contact details in the database
 @app.route("/update_contact/<int:user_id>",methods=["PATCH"])
 def update_contact(user_id):
     contact = db.session.get(Contact, user_id)
@@ -63,11 +65,11 @@ def update_contact(user_id):
     if "isAdmin" in data:
         contact.is_admin = data["isAdmin"]
 
-
     db.session.commit()
 
     return (jsonify({"message": "user updated."}), 200)
 
+# Function that deletes a contact from the database
 @app.route("/delete_contact/<int:user_id>", methods=["DELETE"])
 def delete_contact(user_id):
     contact = db.session.get(Contact, user_id)
@@ -79,6 +81,8 @@ def delete_contact(user_id):
 
     return (jsonify({"message": "user deleted."}), 200)
 
+# Function that checks if given user exists in the database and
+# checks his login credentials.
 @app.route("/login", methods=["POST"])
 def login():
     email = request.json.get("email")
@@ -96,7 +100,7 @@ def login():
     else:
         return jsonify({"message": "Invalid credentials"}), 401
 
-
+# Function that gets the signup dates of all users in the database
 @app.route("/reg_dates", methods=["GET"])
 def get_times():
     # Group by year, month, and day and count occurrences
@@ -113,13 +117,10 @@ def get_times():
             func.extract('day', Contact.time_created)
         ).all()
     )
-
     json_contacts = [
         {"Year": int(date.year), "Month": int(date.month), "Day": int(date.day), "occurances": date.count}
         for date in grouped_data
     ]
-
-
     return jsonify({"dates": json_contacts})
 
 #function to manually add an admin user (incase you get locked out)
@@ -134,7 +135,6 @@ def add_admin(first_name, last_name, email, password, location, is_admin=False):
         return print(e)
     
 if __name__ == "__main__":
-    
     with app.app_context():
         #db.drop_all()  # Deletes previous tables
         db.create_all() # Creates the tables
