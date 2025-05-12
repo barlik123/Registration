@@ -14,6 +14,7 @@ class Auth {
         this.#isAdmin = status;
     }
 
+    // Method to reset authentication status
     resetAuthentication() {
         this.#isUser = false;
         this.#isAdmin = false;
