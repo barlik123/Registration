@@ -1,0 +1,26 @@
+.thanks-title {
+    animation: colorChange 3s infinite;
+    font-size: 4rem; 
+}
+
+@keyframes colorChange {
+    0% { color: red; }
+    25% { color: orange; }
+    50% { color: yellow; }
+    75% { color: green; }
+    100% { color: blue; }
+}
+
+p {
+    font-size: 1.5rem; 
+    margin-top: 20px; 
+}
+
+.thanks-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers child elements vertically */
+    text-align: center; /* Centers text inside the container */
+    position: absolute; top: 50%; left: 50%; 
+    transform: translate(-50%, -50%);
+}
