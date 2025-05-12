@@ -1,6 +1,7 @@
 import { useState } from "react";
 import countries from "./countries.json";
 
+// contact form component for contact credentials registration and contact editing
 const ContactForm = ({ existingContact = {}, updateCallback, adminMode= false }) => {
     const [firstName, setFirstName] = useState(existingContact.firstName || "");
     const [lastName, setLastName] = useState(existingContact.lastName || "");
@@ -11,9 +12,11 @@ const ContactForm = ({ existingContact = {}, updateCallback, adminMode= false })
     
     const updating = Object.keys(existingContact).length !== 0 ; // Check if we have an existing contact to update
 
+    // Function to handle form submission
+    // It sends a POST request to create a new contact
+    // or a PATCH request to update an existing contact
     const onSubmit = async (e) => {
         e.preventDefault() 
-        
         
         const data = {  // Create a data object to send to the backend
             firstName,
@@ -42,6 +45,8 @@ const ContactForm = ({ existingContact = {}, updateCallback, adminMode= false })
         }
     }
 
+    // Render the contact form with input fields for first name, last name, email,
+    // password, location, and admin checkbox (if have admin permissions)
     return (
     <form onSubmit={onSubmit}>
         <div>

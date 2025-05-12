@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react' 
 import { Link } from "react-router-dom";
 
+// Thanks component to display a thank you message after user registration
 function Thanks() {
     return (
         <div>

@@ -1,6 +1,8 @@
 import React from "react";
 import './admin.css';
 
+// ContactList component that receives contacts info from backend 
+// to display a list of contacts with options to update or delete them
 const ContactList = ({ contacts, updateContact, updateCallback }) => {
     const onDelete = async (id) => {
         try {
@@ -18,6 +20,7 @@ const ContactList = ({ contacts, updateContact, updateCallback }) => {
         }
     }
 
+    // Render the contact list with a table displaying contact details
     return <div>
         <h2>Contacts</h2>
         <div className="admin-list">

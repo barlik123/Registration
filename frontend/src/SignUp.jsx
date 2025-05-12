@@ -3,6 +3,8 @@ import './App.css'
 import ContactForm from './ContactForm'
 import { useNavigate } from "react-router-dom";
 
+// SignUp component to handle user registration and display the signup form in a modal
+// It uses the ContactForm component to handle the form submission and validation
 function SignUp() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const navigate = useNavigate(); 
@@ -20,6 +22,7 @@ function SignUp() {
     navigate("/Thanks")
   }
 
+  // renders the signup button and modal for user registration
   return (
   <>
     <button onClick={openCreateModal}>Sign Up</button>

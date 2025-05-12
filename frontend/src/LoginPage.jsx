@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import auth from './auth-service/auth';
 import SignUp from './SignUp';
 
+// login page component for user and admin login and registration
 const LoginPage = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -13,6 +14,7 @@ const LoginPage = () => {
         setPassword("") // Clear the password input
     }
 
+    // Function to handle form submission for login and registration to the backend
     const onSubmit = async (e) => {
         e.preventDefault()
 
@@ -44,6 +46,8 @@ const LoginPage = () => {
         }
     }
 
+    // Render the login form with input fields for email and password
+    // and button for signup form
     return (
     <div>
         <h1>Login Page</h1>

@@ -4,13 +4,14 @@ import "./chart.css";
 
 // This component fetches data from the backend and displays it in a bar chart
 const BarChartComponent = () => {
-  const [chartData, setChartData] = useState([]);
-  const [refreshChart, setRefreshChart] = useState(false);
+  const [chartData, setChartData] = useState([]); // State to hold the chart data
+  const [refreshChart, setRefreshChart] = useState(false); // State to trigger chart refresh
 
   useEffect(() => {
     fetchData();
   }, [refreshChart]);
 
+  // Function to fetch registration data from the backend
   const fetchData = async () => {
     try {
       const response = await fetch("http://127.0.0.1:5000/reg_dates"); 
@@ -25,6 +26,7 @@ const BarChartComponent = () => {
     }
   };
 
+  // Function to render the chart data for display
   return (
     <div className="chart-container">
       <h2>Registration Chart</h2>
@@ -41,7 +43,6 @@ const BarChartComponent = () => {
       <button onClick={() => setRefreshChart(!refreshChart)}>Refresh Chart</button>
     </div>
     );
-    
 };
 
 export default BarChartComponent;
