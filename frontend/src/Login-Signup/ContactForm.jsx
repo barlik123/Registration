@@ -1,5 +1,5 @@
 import { useState } from "react";
-import countries from "./countries.json";
+import countries from "../countries.json";
 
 // contact form component for contact credentials registration and contact editing
 const ContactForm = ({ existingContact = {}, updateCallback, adminMode= false }) => {
@@ -16,7 +16,7 @@ const ContactForm = ({ existingContact = {}, updateCallback, adminMode= false })
     // It sends a POST request to create a new contact
     // or a PATCH request to update an existing contact
     const onSubmit = async (e) => {
-        e.preventDefault() 
+        e.preventDefault(); 
         
         const data = {  // Create a data object to send to the backend
             firstName,
@@ -25,23 +25,23 @@ const ContactForm = ({ existingContact = {}, updateCallback, adminMode= false })
             location,
             password,
             isAdmin: isAdmin 
-        }
+        };
 
         // Determine the URL based on whether we're updating or creating a new contact
-        const url = "http://127.0.0.1:5000/" + (updating ? `update_contact/${existingContact.id}` : "create_contact")   
+        const url = "http://127.0.0.1:5000/" + (updating ? `update_contact/${existingContact.id}` : "create_contact");   
         const options = {
             method: updating ? "PATCH" : "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(data)
-        }
-        const response = await fetch(url, options)
+        };
+        const response = await fetch(url, options);
         if (response.status !== 201 && response.status !== 200) {
-            const data = await response.json()
-            alert(data.message) // if contact submit fails, show the error message
+            const data = await response.json();
+            alert(data.message); // if contact submit fails, show the error message
         } else {
-            updateCallback()
+            updateCallback();
         }
     }
 

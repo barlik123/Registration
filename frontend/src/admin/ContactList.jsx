@@ -8,15 +8,15 @@ const ContactList = ({ contacts, updateContact, updateCallback }) => {
         try {
             const options = {
                 method: "DELETE"
-            }
-            const response = await fetch(`http://127.0.0.1:5000/delete_contact/${id}`, options)
+            };
+            const response = await fetch(`http://127.0.0.1:5000/delete_contact/${id}`, options);
             if (response.status === 200) {
-                updateCallback.onUpdate()
+                updateCallback.onUpdate();
             } else {
-                console.error("Failed to delete contact")
+                console.error("Failed to delete contact");
             }
         } catch (error) {
-            alert(error)
+            alert(error);
         }
     }
 

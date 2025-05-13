@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import auth from './auth-service/auth';
+import auth from '../auth-service/auth';
 import SignUp from './SignUp';
 
 // login page component for user and admin login and registration
@@ -10,39 +10,39 @@ const LoginPage = () => {
     const navigate = useNavigate(); 
 
     const clearParamters = () => {
-        setEmail("") // Clear the email input
-        setPassword("") // Clear the password input
+        setEmail(""); // Clear the email input
+        setPassword(""); // Clear the password input
     }
 
     // Function to handle form submission for login and registration to the backend
     const onSubmit = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
 
-        const data = {email, password }
-        const url = "http://127.0.0.1:5000/login" // URL for the login endpoint
+        const data = {email, password };
+        const url = "http://127.0.0.1:5000/login"; // URL for the login endpoint
         const options = {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(data)
-        }
-        const response = await fetch(url, options) 
+        };
+        const response = await fetch(url, options) ;
         if (response.status == 200) { // Successful login
-            const data = await response.json()
+            const data = await response.json();
             if (data.isAdmin) {
-                clearParamters()
+                clearParamters();
                 auth.setAdminAuthenticated(true); // Set the admin authenticated status
-                navigate("/Admin") // Redirect to Admin page if the user is an admin
+                navigate("/Admin"); // Redirect to Admin page if the user is an admin
             }
             else {
-                clearParamters()
+                clearParamters();
                 auth.setUserAuthenticated(true); // Set the user authenticated status
-                navigate("/Thanks") // Redirect to Thanks page if the user is not an admin
+                navigate("/Thanks"); // Redirect to Thanks page if the user is not an admin
             }
         } else if (response.status == 401 || response.status == 404) { // unsuccessful login
             alert("Unsuccessful login. \ntry again");
-            clearParamters()
+            clearParamters();
         }
     }
 

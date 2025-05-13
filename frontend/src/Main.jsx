@@ -8,9 +8,9 @@ import AdminRoute from "./route-components/AdminRoute";
 
 import "./index.css"; 
 
-import Admin from "./Admin";
-import LoginPage from "./LoginPage";
-import Thanks from "./Thanks";
+import Admin from "./admin/Admin";
+import LoginPage from "./Login-Signup/LoginPage";
+import Thanks from "./thanks/Thanks";
 
 const root = document.getElementById("root");
 

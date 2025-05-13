@@ -1,48 +1,48 @@
-import { useState, useEffect } from 'react' 
-import ContactList from './ContactList'
-import './modal.css'
-import './admin.css'
-import ContactForm from './ContactForm'
+import { useState, useEffect } from 'react'; 
+import ContactList from './ContactList';
+import '../Login-Signup/modal.css';
+import './admin.css';
+import ContactForm from '../Login-Signup/ContactForm';
 import { Link } from "react-router-dom";
 
-import BarChartComponent from "./Chart";
+import BarChartComponent from "./chart/Chart";
 
 // Admin component to manage contacts and display contacts details insights
 function Admin() {
-  const [contacts,setContacts] = useState([])
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [currentContact, setCurrentContact] = useState({})
+  const [contacts,setContacts] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentContact, setCurrentContact] = useState({});
 
   useEffect(() => {
-    fetchContacts()
+    fetchContacts();
   }, [])
 
   // Fetch contacts from the backend
   const fetchContacts = async () => {
-    const response = await fetch('http://127.0.0.1:5000/contacts')
-    const data = await response.json()
-    setContacts(data.contacts)
+    const response = await fetch('http://127.0.0.1:5000/contacts');
+    const data = await response.json();
+    setContacts(data.contacts);
   }
 
   // Function to close the modal and reset the current contact
   const closeModal = () => {
-    setIsModalOpen(false)
-    setCurrentContact({})
+    setIsModalOpen(false);
+    setCurrentContact({});
   }
   // Function to open the modal for creating a new contact
   const openCreateModal = () => {
-    if (!isModalOpen) setIsModalOpen(true)
+    if (!isModalOpen) setIsModalOpen(true);
   }
   // Function to open the modal for editing an existing contact
   const openEditModal = (contact) => { 
-    if (isModalOpen) return
-    setCurrentContact(contact)
-    setIsModalOpen(true)
+    if (isModalOpen) return;
+    setCurrentContact(contact);
+    setIsModalOpen(true);
   }
   // Function to handle the update callback after creating or updating a contact
   const onUpdate = () => {
-    closeModal()
-    fetchContacts()
+    closeModal();
+    fetchContacts();
   }
 
   // renders the admin page 
