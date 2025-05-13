@@ -1,5 +1,5 @@
 import { useState } from 'react' 
-import './App.css'
+import './modal.css'
 import ContactForm from './ContactForm'
 import { useNavigate } from "react-router-dom";
 

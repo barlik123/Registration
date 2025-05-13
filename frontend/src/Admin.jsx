@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react' 
 import ContactList from './ContactList'
-import './App.css'
+import './modal.css'
 import './admin.css'
 import ContactForm from './ContactForm'
 import { Link } from "react-router-dom";
 
-import BarChartComponent from "./chart";
+import BarChartComponent from "./Chart";
 
 // Admin component to manage contacts and display contacts details insights
 function Admin() {

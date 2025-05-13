@@ -2,12 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router";
 
-import PublicRoute from "./route-components/public-route";
-import PrivateRoute from "./route-components/private-route";
-import AdminRoute from "./route-components/admin-route";
+import PublicRoute from "./route-components/PublicRoute";
+import PrivateRoute from "./route-components/PrivateRoute";
+import AdminRoute from "./route-components/AdminRoute";
 
-import Admin from "./admin";
 import "./index.css"; 
+
+import Admin from "./Admin";
 import LoginPage from "./LoginPage";
 import Thanks from "./Thanks";
 
